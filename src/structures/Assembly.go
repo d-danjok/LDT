@@ -4,6 +4,9 @@ import (
 	"LCAD/src/download"
 	"LCAD/src/extraction"
 	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
 )
 
 type remoteSrc struct {
@@ -75,6 +78,15 @@ func (a *Assembly) Install(steamFolder string) error {
 	err = extraction.ExtractToSteamFolder(os.TempDir(), "mods.zip", a.Name, steamFolder)
 	if err != nil {
 		return err
+	}
+
+	//open installation folder if windows is used
+	var cmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		cmd = exec.Command("explorer", filepath.Join(steamFolder, "steamapps/content/app_1966720", a.Name))
+		// Run the command
+		_ = cmd.Start()
+
 	}
 
 	return nil
