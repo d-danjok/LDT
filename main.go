@@ -20,7 +20,7 @@ func main() {
 	if runtime.GOOS == "windows" {
 		definitions.SteamFolder = "C:\\Program Files (x86)\\Steam"
 
-		fmt.Printf("\nDo you want to use default Steam folder location (%s) [y/n]: \n: ", definitions.SteamFolder)
+		fmt.Printf("\nDo you want to use default Steam folder location (%s) [y/n] \n: ", definitions.SteamFolder)
 		var confirmation string
 
 		fmt.Scanln(&confirmation)
@@ -47,5 +47,4 @@ func main() {
 		fmt.Printf("Error installing assembly: %v\n", err)
 		return
 	}
-
 }
