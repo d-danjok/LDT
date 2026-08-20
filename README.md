@@ -55,8 +55,10 @@ to be implemented
     ```
     Then you can choose an exact assembly by typing its number, after that download will begin
 
-
-3. When download is complete folder with LC assembly will pop up, and you can start playing  
+3. After this program will ask for logging in to Steam using QR code, this is necessary because versions are downloaded
+    directly from steam, using [DepotDownloader](https://github.com/SteamRE/DepotDownloader)
+   
+4. When download is complete folder with LC assembly will pop up, and you can start playing  
     TIP: do not forget to launch steam before starting game, without this game won't work correctly
 
 ### GUI
