@@ -14,9 +14,6 @@ func main() {
 
 	preloads.PreloadAssemblyList()
 
-	assemblies := definitions.Assemblies
-	_ = assemblies
-
 	if runtime.GOOS == "windows" {
 		definitions.SteamFolder = "C:\\Program Files (x86)\\Steam"
 
@@ -26,7 +23,13 @@ func main() {
 		fmt.Scanln(&confirmation)
 		if confirmation == "y" || confirmation == "Y" {
 			steamFolderLocated = true
+		} else if confirmation == "n" || confirmation == "N" {
+			fmt.Printf("\nMoving to manual selection\n")
+		} else {
+			fmt.Printf("\nDownload cancelled\n\n")
+			return
 		}
+
 		fmt.Printf("\n")
 	}
 	if !steamFolderLocated {
