@@ -40,6 +40,7 @@ to be implemented
     ```
    if you have Steam installed else where you just have to deny, and then you will have an ability to locate Steam 
    folder manually in popped up window.
+   
    ![](/docs/resorces/img/selectSteamFolderPopUp.png)
 
 2. After you locate Steam folder list of mod assemblies will be displayed
