@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7ce8ae-dc06-4176-93ff-e50332e9fa45" name="Changes" comment="" />
+    <list default="true" id="fd7ce8ae-dc06-4176-93ff-e50332e9fa45" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definitions.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/definitions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preloads/PreloadAssemblyList.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/preloads/PreloadAssemblyList.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/structures/Assembly.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/structures/Assembly.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,61 +48,61 @@
 }</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.623790262863015" />
-      <entry key="MS500" value="4.4121556236802455" />
-      <entry key="S2" value="7.228272912844504" />
-      <entry key="S5" value="8.210924489609933" />
-      <entry key="S10" value="8.5903196235585" />
-      <entry key="S30" value="8.89289526776837" />
-      <entry key="S60" value="9.604442374313747" />
-      <entry key="M2" value="16.274231260850208" />
-      <entry key="M5" value="50.752102338668806" />
-      <entry key="M10" value="87.41980643429" />
-      <entry key="M15" value="106.622318729122" />
-      <entry key="M30" value="138.4216455342935" />
-      <entry key="H1" value="199.8102465018991" />
-      <entry key="H2" value="341.0515488722553" />
-      <entry key="H4" value="548.0715940264739" />
-      <entry key="D1" value="928.2842036297316" />
-      <entry key="W1" value="1028.031494083825" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000001216977106" />
+      <entry key="S60" value="1.0009734989267027" />
+      <entry key="M2" value="1.1128227564793047" />
+      <entry key="M5" value="4.111316059373697" />
+      <entry key="M10" value="13.203113362080714" />
+      <entry key="M15" value="22.19777564970675" />
+      <entry key="M30" value="48.51883099579468" />
+      <entry key="H1" value="126.55050879701854" />
+      <entry key="H2" value="327.4186915298251" />
+      <entry key="H4" value="661.5788726871118" />
+      <entry key="D1" value="1433.4641803332518" />
+      <entry key="W1" value="1670.7410652371766" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.6653915154732158E-141" />
-      <entry key="S5" value="4.8820985193299385E-57" />
-      <entry key="S10" value="6.987201528029639E-29" />
-      <entry key="S30" value="4.1187720458426883E-10" />
-      <entry key="S60" value="2.029475805680548E-5" />
-      <entry key="M2" value="0.004504970372467055" />
-      <entry key="M5" value="0.11520687288796717" />
-      <entry key="M10" value="0.34043124617504206" />
-      <entry key="M15" value="0.5039795716558992" />
-      <entry key="M30" value="1.3080017506755974" />
-      <entry key="H1" value="7.668209421038352" />
-      <entry key="H2" value="30.41012514651752" />
-      <entry key="H4" value="66.65543334804248" />
-      <entry key="D1" value="133.4919706643861" />
-      <entry key="W1" value="150.87605963137858" />
+      <entry key="MS500" value="2.4677351182465352E-206" />
+      <entry key="S2" value="3.9634614220656294E-52" />
+      <entry key="S5" value="2.7493488850675523E-21" />
+      <entry key="S10" value="5.243423390369646E-11" />
+      <entry key="S30" value="3.742880402483736E-4" />
+      <entry key="S60" value="0.019384249567937356" />
+      <entry key="M2" value="0.1491002770065308" />
+      <entry key="M5" value="0.8943984717660093" />
+      <entry key="M10" value="2.6710856180374085" />
+      <entry key="M15" value="4.424004526992093" />
+      <entry key="M30" value="8.99767635678614" />
+      <entry key="H1" value="16.795014992558865" />
+      <entry key="H2" value="33.03773937916644" />
+      <entry key="H4" value="66.93705026579315" />
+      <entry key="D1" value="164.3216919134513" />
+      <entry key="W1" value="196.8501294524824" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.5656353520066515" />
-      <entry key="MS500" value="4.374397102750465" />
-      <entry key="S2" value="7.210992915968151" />
-      <entry key="S5" value="8.20279373318671" />
-      <entry key="S10" value="8.58601143863968" />
-      <entry key="S30" value="8.891392393461386" />
-      <entry key="S60" value="9.603573824375701" />
-      <entry key="M2" value="16.27761154230398" />
-      <entry key="M5" value="50.864982417359975" />
-      <entry key="M10" value="87.75772225450311" />
-      <entry key="M15" value="107.12399207416792" />
-      <entry key="M30" value="139.726765213538" />
-      <entry key="H1" value="207.47021692556604" />
-      <entry key="H2" value="371.4449380183636" />
-      <entry key="H4" value="614.7082502616275" />
-      <entry key="D1" value="1061.7697571278957" />
-      <entry key="W1" value="1178.9065131062325" />
+      <entry key="MS100" value="4.449048001941712E-7" />
+      <entry key="MS500" value="0.05366033977735961" />
+      <entry key="S2" value="0.4812972215508757" />
+      <entry key="S5" value="0.7463891916484765" />
+      <entry key="S10" value="0.8639381874469023" />
+      <entry key="S30" value="0.9527779552549772" />
+      <entry key="S60" value="0.9958770718729547" />
+      <entry key="M2" value="1.2469756513067298" />
+      <entry key="M5" value="4.984806031436504" />
+      <entry key="M10" value="15.846185327820965" />
+      <entry key="M15" value="26.59338522244334" />
+      <entry key="M30" value="57.49206825684098" />
+      <entry key="H1" value="143.32603693899208" />
+      <entry key="H2" value="360.4389998916703" />
+      <entry key="H4" value="728.4983359378257" />
+      <entry key="D1" value="1597.778401928339" />
+      <entry key="W1" value="1867.5899053926637" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -109,30 +117,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build LCAD.executor": "Debug",
-    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
-    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.analysis.ui.options.defaults": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "features/basic__functionality",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/Daniil/GolandProjects/LCAD/src/downloadMethods",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build LCAD.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;features/basic__functionality&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Daniil&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Daniil\GolandProjects\LCAD\src\downloadMethods" />
@@ -141,14 +150,23 @@
       <recent name="C:\Users\Daniil\GolandProjects\LCAD" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Daniil\GolandProjects\LCAD\src\manifestDownload" />
       <recent name="C:\Users\Daniil\GolandProjects\LCAD" />
       <recent name="C:\Users\Daniil\GolandProjects\LCAD\src\preloads" />
       <recent name="C:\Users\Daniil\GolandProjects\LCAD\src" />
       <recent name="C:\Users\Daniil\GolandProjects\LCAD\embed\versions\v73" />
-      <recent name="C:\Users\Daniil\GolandProjects\LCAD\versions" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build LCAD">
+    <configuration name="go build LCAD (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="LCAD" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="LCAD" />
+      <directory value="$PROJECT_DIR$" />
+      <auto_managed_config_id value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build LCAD" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
