@@ -7,7 +7,7 @@ import (
 	"github.com/sqweek/dialog"
 )
 
-func LocateSteamFolder() error {
+func BrowseForSteamFolder() error {
 	var err error
 
 	definitions.SteamFolder, err = dialog.Directory().Title("Select steam folder").Browse()
