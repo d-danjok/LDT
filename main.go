@@ -1,53 +1,49 @@
 package main
 
 import (
-	"LCAD/src"
+	definitions "LCAD/src"
 	"LCAD/src/cli"
-	"LCAD/src/gui"
+	"LCAD/src/installs"
 	"LCAD/src/preloads"
+	"errors"
 	"fmt"
-	"runtime"
+	"os"
 )
 
 func main() {
-	var steamFolderLocated bool
+	if len(os.Args) > 1 {
+		if os.Args[1] == "-a" {
+			definitions.CleanMode = false
+		}
+	}
+	cli.ClearTerminal()
 
 	preloads.PreloadAssemblyList()
 
-	if runtime.GOOS == "windows" {
-		definitions.SteamFolder = "C:\\Program Files (x86)\\Steam"
+	installationModes := []string{"" +
+		"Complete assembly installation \n " +
+		"  \t(installs complete mod assembly with mods from remote source, requires steam authorisation using QR code)",
+		"Individual mod installation \n" +
+			"  \t(installing mods from Thunderstore by link, can be installed as new game instance or into existing installation folder)"}
 
-		fmt.Printf("\nDo you want to use default Steam folder location (%s) [y/n] \n: ", definitions.SteamFolder)
-		var confirmation string
-
-		fmt.Scanln(&confirmation)
-		if confirmation == "y" || confirmation == "Y" {
-			steamFolderLocated = true
-		} else if confirmation == "n" || confirmation == "N" {
-			fmt.Printf("\nMoving to manual selection\n")
-		} else {
-			fmt.Printf("\nDownload cancelled\n\n")
-			return
-		}
-
-		fmt.Printf("\n")
-	}
-	if !steamFolderLocated {
-		err := gui.LocateSteamFolder()
-		if err != nil {
-			fmt.Printf("Error selecting folder: %v\n", err)
-			return
-		}
-	}
-	assemblyToInstall, err := cli.SelectAssemblyToInstall()
+	installationMode, err := cli.SelectByNum("installation type", 2, nil, installationModes)
 	if err != nil {
-		fmt.Printf("Error selecting assembly: %v\n", err)
+		fmt.Printf("Error selecting installation type: %v\n", err)
 		return
 	}
 
-	err = assemblyToInstall.Install(definitions.SteamFolder)
+	cli.ClearTerminal()
+
+	switch installationMode {
+	case 0:
+		err = installs.InstallCompleteAssembly()
+	case 1:
+		err = installs.InstallWithIndividualMods()
+	default:
+		err = errors.New("invalid installation type")
+	}
 	if err != nil {
-		fmt.Printf("Error installing assembly: %v\n", err)
+		fmt.Printf("Error assembly: %v\n", err)
 		return
 	}
 }

@@ -1,4 +1,4 @@
-module LCAD
+module LDT
 
 go 1.26
 
