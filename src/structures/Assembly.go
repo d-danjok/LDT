@@ -11,20 +11,20 @@ import (
 	"runtime"
 )
 
-type remoteSrc struct {
-	remoteType string
-	url        string
+type RemoteSrc struct {
+	RemoteType string
+	Url        string
 }
 
 type Assembly struct {
 	Name                  string
 	BaseVersionManifestID string
-	mods                  remoteSrc
+	Mods                  RemoteSrc
 }
 
 func (a *Assembly) SetMods(remoteType string, remoteLink string) {
-	a.mods.remoteType = remoteType
-	a.mods.url = remoteLink
+	a.Mods.RemoteType = remoteType
+	a.Mods.Url = remoteLink
 }
 
 func (a *Assembly) downloadAll(tmpDirPath string, steamFolder string) error {
@@ -47,12 +47,12 @@ func (a *Assembly) downloadAll(tmpDirPath string, steamFolder string) error {
 		return err
 	}
 
-	//download mods archive
+	//download Mods archive
 	err = downloads.DownloadByRemoteType(
-		a.mods.remoteType,
-		a.mods.url,
+		a.Mods.RemoteType,
+		a.Mods.Url,
 		tmpDirPath,
-		"mods.zip")
+		"Mods.zip")
 	if err != nil {
 		return err
 	}
@@ -72,18 +72,18 @@ func (a *Assembly) Install(steamFolder string) error {
 		}
 	}()
 
-	//download base version and mods
+	//download base version and Mods
 	err := a.downloadAll(os.TempDir(), steamFolder)
 	if err != nil {
 		return err
 	}
 
-	if a.mods.remoteType == "" {
+	if a.Mods.RemoteType == "" {
 		return nil
 	}
 
-	//extract mods to steam folder
-	err = extraction.ExtractToSteamFolder(os.TempDir(), "mods.zip", a.Name, steamFolder)
+	//extract Mods to steam folder
+	err = extraction.ExtractToSteamFolder(os.TempDir(), "Mods.zip", a.Name, steamFolder)
 	if err != nil {
 		return err
 	}
