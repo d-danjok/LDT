@@ -8,6 +8,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# Add this at the top level
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -18,7 +22,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.26"
+          go-version: "1.22"
 
       - name: Install go-winres
         run: go install github.com/tc-hib/go-winres@latest
@@ -37,8 +41,11 @@ jobs:
 
   release:
     needs: build
-    runs-on: windows-latest   # ← windows here too, no ubuntu
-    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: windows-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: write
 
     steps:
       - name: Download artifact
@@ -51,3 +58,4 @@ jobs:
         with:
           files: LDT.exe
           generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}  # ← explicit token
