@@ -93,6 +93,7 @@ This mode installs mods from Thunderstore by link, automatically resolving and i
    - Select the LC version to download (v50, v56, v73)
    - Enter a name for the installation
    - Steam QR login will be required to download the game files
+   
    **Existing LC installation:**
    - Locate your existing LC installation folder in the pop-up
    - If BepInEx mods are already present, choose to install alongside or erase existing mods
