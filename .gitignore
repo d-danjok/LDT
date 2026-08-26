@@ -1,5 +1,6 @@
 /src/icons/
 /LDT.exe
+.idea
 
 # go-winres generated
 *.syso
