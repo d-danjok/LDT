@@ -10,11 +10,21 @@ const (
 )
 
 var SteamFolder string
-var Assemblies []structures.Assembly
+var Assemblies = []structures.Assembly{
+	{
+		Name:                  "v73 Wesley's Basic",
+		BaseVersionManifestID: V73ManifestID,
+		Mods: structures.RemoteSrc{
+			RemoteType: "GoogleDrive",
+			Url:        "https://drive.google.com/file/d/12fwUhp5xuKSIlF_w6GllVlDHPDHLefGN/view?usp=sharing",
+		},
+	},
+}
+
 var LCVersions = []structures.LCVersion{
-	{"v50HotFix", V50HotFixManifestID},
-	{"v56", V56ManifestID},
-	{"v73", V73ManifestID},
+	{"v50HotFix", V50HotFixManifestID, "2024-07-06"},
+	{"v56", V56ManifestID, "2024-08-17"},
+	{"v73", V73ManifestID, "2026-03-29"},
 }
 
 var CleanMode = true
