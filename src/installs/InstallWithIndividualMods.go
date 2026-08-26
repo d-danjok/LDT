@@ -5,6 +5,7 @@ import (
 	"LDT/src/cli"
 	"LDT/src/fsManagement"
 	"LDT/src/pkgInstallation"
+	"LDT/src/structures"
 	"bufio"
 	"fmt"
 	"net/url"
@@ -17,7 +18,7 @@ import (
 	"github.com/sqweek/dialog"
 )
 
-var lcVersion string
+var lcVersion structures.LCVersion
 
 func installNewLCInstance() (string, error) {
 	var installationName string
@@ -28,16 +29,9 @@ func installNewLCInstance() (string, error) {
 		return "", err
 	}
 
-	normaliseLCVersionName := func(lcVersionName string) string {
-		switch lcVersionName {
-		case "v50HotFix":
-			return "v50"
-		default:
-			return lcVersionName
-		}
-	}
+	lcVersion = definitions.LCVersions[lcVersionToInstallNum]
 
-	lcVersion = normaliseLCVersionName(definitions.LCVersions[lcVersionToInstallNum].Name)
+	cli.ClearTerminal()
 
 	fmt.Printf("How do you want you installation to be named?\n")
 	scanner := bufio.NewScanner(os.Stdin)
@@ -46,12 +40,14 @@ func installNewLCInstance() (string, error) {
 		scanner.Scan()
 		installationName = scanner.Text()
 
-		installationPath = filepath.Join(definitions.SteamFolder, "steamapps/content/app_1966720", lcVersion+" "+installationName)
+		installationPath = filepath.Join(definitions.SteamFolder, "steamapps/content/app_1966720", lcVersion.Name+" "+installationName)
 		if !fsManagement.Exists(installationPath) {
 			break
 		}
 		fmt.Printf("There is an assembly with the same name, select different name\n\n")
 	}
+
+	cli.ClearTerminal()
 
 	err = cli.LocateSteamFolder()
 	if err != nil {
@@ -100,16 +96,7 @@ func installIntoExistingInstance() (string, error) {
 		return "", err
 	}
 
-	normaliseLCVersionName := func(lcVersionName string) string {
-		switch lcVersionName {
-		case "v50HotFix":
-			return "v50"
-		default:
-			return lcVersionName
-		}
-	}
-
-	lcVersion = normaliseLCVersionName(definitions.LCVersions[lcVersionToInstallNum].Name)
+	lcVersion = definitions.LCVersions[lcVersionToInstallNum]
 
 	return installationPath, nil
 }

@@ -22,7 +22,7 @@ a simple program which would allow to easily install mod assemblies.
  
 Brief idea was already mentioned in [motivation](#motivation), but here it will be explained in detail.
  
-Main idea is to provide a convenient tool for downloading and sharing mod assemblies, with support for installing mods
+Main idea is to provide a convenient tool for downloading and sharing mod assemblies, with support for installing Mods
 compatible with older versions of the game independently. LCAD automatically resolves and installs mod dependencies,
 downloading the correct version of each mod for your target LC version.
  
@@ -35,9 +35,9 @@ On launch you will be asked to select an installation mode:
 Select installation type by entering corresponding number
  
 0:  Complete assembly installation
-      (installs complete mod assembly with mods from remote source, requires steam authorisation using QR code)
+      (installs complete mod assembly with Mods from remote source, requires steam authorisation using QR code)
 1:  Individual mod installation
-      (installing mods from Thunderstore by link, can be installed as new game instance or into existing installation folder)
+      (installing Mods from Thunderstore by link, can be installed as new game instance or into existing installation folder)
  
 :
 ```
@@ -77,7 +77,7 @@ This mode downloads a full pre-configured mod assembly directly from Steam using
  
 ### Individual Mod Installation
  
-This mode installs mods from Thunderstore by link, automatically resolving and installing all dependencies at the correct version for your target LC version.
+This mode installs Mods from Thunderstore by link, automatically resolving and installing all dependencies at the correct version for your target LC version.
  
 1. **Choose installation target** — select whether to create a fresh LC instance or install into an existing one
 ```
@@ -95,9 +95,9 @@ This mode installs mods from Thunderstore by link, automatically resolving and i
    - Steam QR login will be required to download the game files
    **Existing LC installation:**
    - Locate your existing LC installation folder in the pop-up
-   - If BepInEx mods are already present, choose to install alongside or erase existing mods
+   - If BepInEx Mods are already present, choose to install alongside or erase existing Mods
    - Select which LC version you have installed (used to pick compatible mod versions)
-2. **Install mods** — enter a Thunderstore link in the following format:
+2. **Install Mods** — enter a Thunderstore link in the following format:
 ```
    https://thunderstore.io/c/lethal-company/p/[author]/[packageName]/
 ```
@@ -111,7 +111,7 @@ This mode installs mods from Thunderstore by link, automatically resolving and i
    - Find the latest mod version compatible with your LC version
    - Download the mod and all its dependencies
    - Install everything into the correct location
-3. **Install more mods** — after each successful install, you will be asked if you want to install another mod. Type `abort` or `a` at any time to stop.
+3. **Install more Mods** — after each successful install, you will be asked if you want to install another mod. Type `abort` or `a` at any time to stop.
 4. **Done** — the installation folder will open when you're finished.
 ---
  

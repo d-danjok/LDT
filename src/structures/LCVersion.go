@@ -7,8 +7,9 @@ import (
 )
 
 type LCVersion struct {
-	Name       string
-	ManifestID string
+	Name        string
+	ManifestID  string
+	ReleaseDate string
 }
 
 func (v LCVersion) Install(installationPath string) error {
