@@ -2,6 +2,7 @@ package pkgInstallation
 
 import (
 	downloads "LDT/src/download"
+	"LDT/src/structures"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -116,7 +117,7 @@ func getPkg(author, name, version string) (Version, error) {
 	return ver, nil
 }
 
-func getMaxPkgDateByLCVersion(version string) (time.Time, error) {
+func getMaxPkgDateByLCVersion(version structures.LCVersion) (time.Time, error) {
 	var maxDate time.Time
 	var err error
 
@@ -128,16 +129,7 @@ func getMaxPkgDateByLCVersion(version string) (time.Time, error) {
 		return maxDate, nil
 	}
 
-	switch version {
-	case "v50":
-		return formDate("2024-07-06")
-	case "v56":
-		return formDate("2024-08-17")
-	case "v73":
-		return formDate("2026-03-29")
-	default:
-		return maxDate, fmt.Errorf("sorry, but there is no support for %s", version)
-	}
+	return formDate(version.LastDate)
 }
 
 // resolveAndInstallPkg finds the latest Version of a package released before
@@ -224,7 +216,7 @@ func installDependencies(dependencies []string, destPath string, maxDate time.Ti
 	return nil
 }
 
-func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersion string) error {
+func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersion structures.LCVersion) error {
 	parsedURL, err := url.Parse(link)
 	if err != nil {
 		return err
