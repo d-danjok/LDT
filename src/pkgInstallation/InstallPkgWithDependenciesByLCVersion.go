@@ -1,7 +1,7 @@
 package pkgInstallation
 
 import (
-	downloads "LCAD/src/download"
+	downloads "LDT/src/download"
 	"encoding/json"
 	"fmt"
 	"net/http"

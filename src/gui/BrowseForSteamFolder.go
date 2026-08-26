@@ -1,7 +1,7 @@
 package gui
 
 import (
-	definitions "LCAD/src"
+	definitions "LDT/src"
 	"fmt"
 
 	"github.com/sqweek/dialog"

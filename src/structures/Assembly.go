@@ -1,9 +1,9 @@
 package structures
 
 import (
-	"LCAD/src/download"
-	"LCAD/src/extraction"
-	"LCAD/src/manifestDownload"
+	"LDT/src/download"
+	"LDT/src/extraction"
+	"LDT/src/manifestDownload"
 	"fmt"
 	"os"
 	"os/exec"

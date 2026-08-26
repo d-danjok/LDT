@@ -1,10 +1,10 @@
 package main
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/cli"
-	"LCAD/src/installs"
-	"LCAD/src/preloads"
+	definitions "LDT/src"
+	"LDT/src/cli"
+	"LDT/src/installs"
+	"LDT/src/preloads"
 	"errors"
 	"fmt"
 	"os"
