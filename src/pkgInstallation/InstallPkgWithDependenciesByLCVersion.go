@@ -129,7 +129,7 @@ func getMaxPkgDateByLCVersion(version structures.LCVersion) (time.Time, error) {
 		return maxDate, nil
 	}
 
-	return formDate(version.ReleaseDate)
+	return formDate(version.LastDate)
 }
 
 // resolveAndInstallPkg finds the latest Version of a package released before
