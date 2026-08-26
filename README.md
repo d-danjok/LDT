@@ -1,4 +1,4 @@
-LCAD (Lethal Company Assembly Downloader)
+LDT (Lethal Download Tools)
 ==
 
 Convenient tool for downloading and installing mod assemblies for legacy Lethal Company versions
