@@ -1,6 +1,6 @@
 package definitions
 
-import "LCAD/src/structures"
+import "LDT/src/structures"
 
 // manifestIDs for versions download
 const (

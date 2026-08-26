@@ -1,8 +1,8 @@
 package preloads
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/structures"
+	definitions "LDT/src"
+	"LDT/src/structures"
 )
 
 func PreloadAssemblyList() {

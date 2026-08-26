@@ -1,8 +1,8 @@
 package cli
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/structures"
+	definitions "LDT/src"
+	"LDT/src/structures"
 )
 
 func SelectAssemblyToInstall() (structures.Assembly, error) {

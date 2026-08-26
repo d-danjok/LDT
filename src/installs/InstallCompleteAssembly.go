@@ -1,8 +1,8 @@
 package installs
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/cli"
+	definitions "LDT/src"
+	"LDT/src/cli"
 	"fmt"
 )
 

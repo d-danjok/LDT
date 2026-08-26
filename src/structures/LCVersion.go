@@ -1,7 +1,7 @@
 package structures
 
 import (
-	"LCAD/src/manifestDownload"
+	"LDT/src/manifestDownload"
 	"fmt"
 	"os"
 )

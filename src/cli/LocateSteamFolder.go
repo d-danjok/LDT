@@ -1,8 +1,8 @@
 package cli
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/gui"
+	definitions "LDT/src"
+	"LDT/src/gui"
 	"fmt"
 	"runtime"
 )

@@ -1,7 +1,7 @@
 package cli
 
 import (
-	definitions "LCAD/src"
+	definitions "LDT/src"
 	"fmt"
 )
 

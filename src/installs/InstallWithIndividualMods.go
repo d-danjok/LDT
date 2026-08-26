@@ -1,10 +1,10 @@
 package installs
 
 import (
-	definitions "LCAD/src"
-	"LCAD/src/cli"
-	"LCAD/src/fsManagement"
-	"LCAD/src/pkgInstallation"
+	definitions "LDT/src"
+	"LDT/src/cli"
+	"LDT/src/fsManagement"
+	"LDT/src/pkgInstallation"
 	"bufio"
 	"fmt"
 	"net/url"
@@ -184,7 +184,7 @@ func installMods(lcLocationPath string) error {
 		if !installNext {
 			return nil
 		}
-		
+
 		cli.ClearTerminal()
 	}
 
