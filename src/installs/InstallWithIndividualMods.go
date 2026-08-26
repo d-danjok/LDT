@@ -33,6 +33,13 @@ func installNewLCInstance() (string, error) {
 
 	cli.ClearTerminal()
 
+	err = cli.LocateSteamFolder()
+	if err != nil {
+		return "", fmt.Errorf("error locating Steam folder: %v", err)
+	}
+
+	cli.ClearTerminal()
+
 	fmt.Printf("How do you want you installation to be named?\n")
 	scanner := bufio.NewScanner(os.Stdin)
 	for true {
@@ -45,13 +52,6 @@ func installNewLCInstance() (string, error) {
 			break
 		}
 		fmt.Printf("There is an assembly with the same name, select different name\n\n")
-	}
-
-	cli.ClearTerminal()
-
-	err = cli.LocateSteamFolder()
-	if err != nil {
-		return "", fmt.Errorf("error locating Steam folder: %v", err)
 	}
 
 	err = definitions.LCVersions[lcVersionToInstallNum].Install(installationPath)
