@@ -8,7 +8,7 @@ import (
 func PreloadAssemblyList() {
 	//TODO: Replace hardcode with some kind of online actualisation of available versions
 	v50HotFixNonModded := structures.Assembly{Name: "v50 hotfix Non-modded"}
-	v50HotFixNonModded.BaseVersionManifestID = definitions.V50HotFixManifest
+	v50HotFixNonModded.BaseVersionManifestID = definitions.V50HotFixManifestID
 	v50HotFixNonModded.SetMods("", "")
 	definitions.Assemblies = append(definitions.Assemblies, v50HotFixNonModded)
 

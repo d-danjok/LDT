@@ -1,5 +1,7 @@
-/rsrc_windows_amd64.syso
-/rsrc_windows_386.syso
-/winres/
 /src/icons/
-/LCAD.exe
+/LDT.exe
+.idea
+
+# go-winres generated
+*.syso
+winres/
