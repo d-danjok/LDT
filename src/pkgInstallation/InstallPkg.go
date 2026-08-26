@@ -1,4 +1,4 @@
-package packageInstallation
+package pkgInstallation
 
 import (
 	"archive/zip"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-var bepInExInstalled bool
+var BepInExInstalled bool
 
 func archiveName(pkgName string) string {
 	return pkgName + ".zip"
@@ -18,7 +18,7 @@ func installBepInEx(archiveLocation string, installationPath string) error {
 	const pkgName = "BepInEx-BepInExPack"
 
 	//no more install
-	if bepInExInstalled {
+	if BepInExInstalled {
 		return nil
 	}
 
@@ -65,11 +65,11 @@ func installBepInEx(archiveLocation string, installationPath string) error {
 		}
 	}
 
-	bepInExInstalled = true
+	BepInExInstalled = true
 	return nil
 }
 
-func InstallPackage(pkgName string, archiveLocation string, installationPath string) error {
+func InstallPkg(pkgName string, archiveLocation string, installationPath string) error {
 	if pkgName == "BepInEx-BepInExPack" {
 		return installBepInEx(archiveLocation, installationPath)
 	}

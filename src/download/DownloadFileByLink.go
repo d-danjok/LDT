@@ -1,7 +1,6 @@
 package downloads
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -30,7 +29,8 @@ func DownloadFileByLink(link string, fileName string) error {
 
 	defer file.Close()
 
-	fmt.Printf("Downloaded a file %s with size %d\n\n", fileName, size)
+	_ = size
+	//fmt.Printf("Downloaded a file %s with size %d\n\n", fileName, size)
 
 	return nil
 }

@@ -1,4 +1,4 @@
-package packageInstallation
+package pkgInstallation
 
 import (
 	downloads "LCAD/src/download"
@@ -167,7 +167,7 @@ func resolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time
 
 	var pkgInfo Version
 	for i := 0; i < maxInstallationTries; i++ {
-		fmt.Printf("Installing %s try number %d\n", fullName, i+1)
+		fmt.Printf("Installing %s (Try number %d)\n", fullName, i+1)
 
 		pkgInfo, err = getPkg(pkgAuthor, pkgName, versionToDownload.Version)
 		if err != nil {
@@ -181,7 +181,7 @@ func resolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time
 			return nil, fmt.Errorf("downloading %s: %w", fullName, err)
 		}
 
-		err = InstallPackage(fullName, destPath, "tmp")
+		err = InstallPkg(fullName, destPath, destPath)
 		if err != nil {
 			err = fmt.Errorf("installing package %s: %w", pkgName, err)
 			continue
@@ -199,7 +199,7 @@ func resolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time
 	}
 
 	//Avoiding ddos protection
-	time.Sleep(2 * time.Second)
+	time.Sleep(200 * time.Millisecond)
 
 	return pkgInfo.Dependencies, nil
 }
@@ -231,8 +231,14 @@ func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersi
 	}
 
 	linkPathParts := strings.Split(parsedURL.Path, "/")
-	pkgName := linkPathParts[len(linkPathParts)-1]
-	pkgAuthor := linkPathParts[len(linkPathParts)-2]
+
+	partShift := 0
+	if link[len(link)-1] == '/' {
+		partShift = 1
+	}
+
+	pkgName := linkPathParts[len(linkPathParts)-1-partShift]
+	pkgAuthor := linkPathParts[len(linkPathParts)-2-partShift]
 
 	maxPkgDate, err := getMaxPkgDateByLCVersion(LCVersion)
 	if err != nil {
