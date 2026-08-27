@@ -1,126 +1,97 @@
-LDT (Lethal Download Tools)
-==
- 
-Convenient tool for downloading and installing mod assemblies for legacy [Lethal Company](https://store.steampowered.com/app/1966720/Lethal_Company/) versions
- 
-## Contents
- 
-* [Motivation](#motivation)
-* [Concept](#concept)
-* [Usage](#usage)
-  * [Complete Assembly Installation](#complete-assembly-installation)
-  * [Individual Mod Installation](#individual-mod-installation)
-* [Requirements](#requirements)
-## Motivation
- 
-Idea for this project came after 2 days of trying to make Wesley's Moons mod work, the complexity of this was in fact
-that currently Wesley's Moons does not support v80 Lethal Company. And because of how much dependencies this mod has
-it turned into nightmare when debugging. So in order to simplify life for my friends I came up with an idea to write
-a simple program which would allow to easily install mod assemblies.
- 
-## Concept
- 
-Brief idea was already mentioned in [motivation](#motivation), but here it will be explained in detail.
- 
-Main idea is to provide a convenient tool for downloading and sharing mod assemblies, with support for installing Mods
-compatible with older versions of the game independently. LCAD automatically resolves and installs mod dependencies,
-downloading the correct version of each mod for your target LC version.
- 
- 
-## Usage
- 
-On launch you will be asked to select an installation mode:
- 
+# LDT (Lethal Download Tools)
+
+A desktop helper for installing and managing Lethal Company mod setups, including full assembly downloads and Thunderstore mod installs with dependency resolution.
+
+## Overview
+
+LDT is built to simplify mod installation for older and legacy Lethal Company versions. Instead of manually tracking compatibility and dependency chains, the app helps you:
+
+- install a ready-made mod assembly from Steam
+- install individual mods from Thunderstore by URL
+- choose a target LC version and automatically fetch compatible package versions
+- create a new game instance or work with an existing installation
+
+The project is built as a Wails desktop app and currently targets Windows usage for the main workflow.
+
+## Features
+
+- Full assembly install flow using Steam depot downloads and QR-based Steam login
+- Individual mod installation from Thunderstore links
+- Dependency-aware package installation for the selected LC version
+- Support for a fresh LC install or an existing game folder
+- Automatic choice of compatible mod versions based on LC version
+- Automatic download and extraction of DepotDownloader when needed
+
+## Installation modes
+
+When the app starts, it asks which mode you want to use:
+
+*  Complete assembly installation 
+    > installs a complete mod assembly from a remote source and requires Steam authentication via QR code
+*  Individual mod installation
+   > installs mods from Thunderstore by link to a new or existing LC install
+
+
+### Complete assembly installation
+
+This mode installs a pre-configured mod assembly using Steam depot downloads via [DepotDownloader](https://github.com/SteamRE/DepotDownloader).
+
+1. Choose the Steam folder to use.
+  - By default, the app points to `C:\Program Files (x86)\Steam`.
+  - If Steam is elsewhere, choose the correct folder manually.
+2. Select the assembly from the available list.
+3. Log in to Steam when prompted with the QR code in the Steam mobile app.
+4. Wait for the download to finish and the install folder will open automatically.
+
+> Tip: make sure Steam is running when launching the game after installation.
+
+### Individual mod installation
+
+This mode installs one or more mods from Thunderstore and resolves dependencies for your chosen LC version.
+
+1. Choose the installation target:
+  - create a new LC instance
+  - install into an existing installation
+2. Pick the LC version you are targeting.
+3. Enter a Thunderstore package URL in this format:
+
+```text
+https://thunderstore.io/c/lethal-company/p/[author]/[packageName]/
 ```
-Select installation type by entering corresponding number
- 
-0:  Complete assembly installation
-      (installs complete mod assembly with Mods from remote source, requires steam authorisation using QR code)
-1:  Individual mod installation
-      (installing Mods from Thunderstore by link, can be installed as new game instance or into existing installation folder)
- 
-:
+
+Example:
+
+```text
+https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/
 ```
- 
----
- 
-### Complete Assembly Installation
- 
-This mode downloads a full pre-configured mod assembly directly from Steam using [DepotDownloader](https://github.com/SteamRE/DepotDownloader).
- 
-1. **Locate Steam folder** — on start the program will ask you to confirm the default Steam folder location (`C:\Program Files (x86)\Steam`)
-```
-   Do you want to use default Steam folder location (C:\Program Files (x86)\Steam) [confirm/deny]
-   :
-```
- 
-   If Steam is installed elsewhere, deny and locate the folder manually in the pop-up window.
- 
-   ![Steam folder selection pop-up](/docs/resorces/img/selectSteamFolderPopUp.png)
- 
-2. **Select assembly** — a list of available mod assemblies will be displayed
-```
-   Select assembly you want to install by entering corresponding number
- 
-   0:    v73 Non modded
-   1:    v73 Wesley's Basic
-   ...
-   n:    vXX ...
- 
-   :
-```
- 
-3. **Steam login via QR code** — because game versions are downloaded directly from Steam, you will be prompted to log in by scanning a QR code with the Steam mobile app
-4. **Done** — when the download is complete, the installation folder will open automatically. You can then launch the game.
-   > **Tip:** Make sure Steam is running before launching the game, otherwise it won't work correctly.
----
- 
-### Individual Mod Installation
- 
-This mode installs Mods from Thunderstore by link, automatically resolving and installing all dependencies at the correct version for your target LC version.
- 
-1. **Choose installation target** — select whether to create a fresh LC instance or install into an existing one
-```
-   Select installation type by entering corresponding number
- 
-   0:  Install new LC instance
-   1:  Install into existing LC installation
- 
-   :
-```
- 
-   **New LC instance:**
-   - Select the LC version to download (v50, v56, v73)
-   - Enter a name for the installation
-   - Steam QR login will be required to download the game files
-   
-   **Existing LC installation:**
-   - Locate your existing LC installation folder in the pop-up
-   - If BepInEx Mods are already present, choose to install alongside or erase existing Mods
-   - Select which LC version you have installed (used to pick compatible mod versions)
-2. **Install Mods** — enter a Thunderstore link in the following format:
-```
-   https://thunderstore.io/c/lethal-company/p/[author]/[packageName]/
-```
- 
-   Example:
-```
-   https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/
-```
- 
-   LCAD will automatically:
-   - Find the latest mod version compatible with your LC version
-   - Download the mod and all its dependencies
-   - Install everything into the correct location
-3. **Install more Mods** — after each successful install, you will be asked if you want to install another mod. Type `abort` or `a` at any time to stop.
-4. **Done** — the installation folder will open when you're finished.
----
- 
+
+4. The app resolves the latest compatible version, downloads dependencies, and installs everything into the correct folder.
+5. After each install, you can continue with another mod or stop.
+
 ## Requirements
- 
-- **Windows** (only supported platform)
-- **Steam** installed (default or custom path)
-- **Internet connection**
-- [DepotDownloader](https://github.com/SteamRE/DepotDownloader) — downloaded automatically on first run, requires [.NET 8.0+](https://dotnet.microsoft.com/download/dotnet/8.0)
-- A **Steam account** with Lethal Company owned (required for complete assembly installation)
+
+- Windows (primary supported platform)
+- Steam installed and available on the system
+- Internet connection
+- [.NET 8.0+](https://dotnet.microsoft.com/download/dotnet/8.0)
+- A Steam account with Lethal Company ownership for full assembly installation
+
+## Build and run
+
+This project uses Go and Wails.
+
+```bash
+go mod download
+wails build
+```
+
+For local development with the frontend:
+
+```bash
+wails dev
+```
+
+## Project purpose
+
+The original motivation was to make older Lethal Company mod setups easier to install and debug, especially when dependencies and version compatibility become complicated. LDT is meant to reduce that complexity and make mod installation safer and more repeatable.
  

@@ -17,7 +17,7 @@ func main() {
 	err := wails.Run(&options.App{
 		Title:  "Lethal Download Tools",
 		Width:  480,
-		Height: 800,
+		Height: 720,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
