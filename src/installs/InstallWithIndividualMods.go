@@ -101,7 +101,7 @@ func installIntoExistingInstance() (string, error) {
 	return installationPath, nil
 }
 
-func isThunderstoreLink(link string) bool {
+func IsThunderstoreLink(link string) bool {
 	parsedURL, err := url.Parse(link)
 	if err != nil {
 		return false
@@ -129,7 +129,7 @@ func installMods(lcLocationPath string) error {
 
 	defer cli.ClearTerminal()
 
-	isValidLink := isThunderstoreLink
+	isValidLink := IsThunderstoreLink
 
 	for true {
 		fmt.Printf("Enter link to mod you want to install from Thunderstore" +

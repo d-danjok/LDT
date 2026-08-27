@@ -4,9 +4,11 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+	"syscall"
 
 	"golang.org/x/sys/windows"
 )
@@ -43,6 +45,33 @@ func filterAndPrintQR(r io.Reader) {
 	}
 }
 
+var allocConsole = syscall.NewLazyDLL("kernel32.dll").NewProc("AllocConsole")
+
+func ensureConsole() {
+	if runtime.GOOS != "windows" {
+		return
+	}
+
+	if allocConsole != nil {
+		if _, _, err := allocConsole.Call(); err != nil && err != syscall.Errno(0) {
+			// Nothing to do: the app may already have a console assigned.
+		}
+	}
+
+	if outHandle, err := windows.GetStdHandle(windows.STD_OUTPUT_HANDLE); err == nil && outHandle != windows.InvalidHandle {
+		os.Stdout = os.NewFile(uintptr(outHandle), "CONOUT$")
+	}
+	if errHandle, err := windows.GetStdHandle(windows.STD_ERROR_HANDLE); err == nil && errHandle != windows.InvalidHandle {
+		os.Stderr = os.NewFile(uintptr(errHandle), "CONOUT$")
+	}
+	if inHandle, err := windows.GetStdHandle(windows.STD_INPUT_HANDLE); err == nil && inHandle != windows.InvalidHandle {
+		os.Stdin = os.NewFile(uintptr(inHandle), "CONIN$")
+	}
+
+	_ = windows.SetConsoleOutputCP(65001)
+	_ = windows.SetConsoleCP(65001)
+}
+
 // runDepotDownloader runs DepotDownloader with the provided arguments.
 func runDepotDownloader(args ...string) error {
 	// Auto-download DepotDownloader if missing
@@ -51,9 +80,14 @@ func runDepotDownloader(args ...string) error {
 		return fmt.Errorf("failed to get DepotDownloader: %w", err)
 	}
 
+	ensureConsole()
+
 	cmd := exec.Command(binaryPath, args...)
 
 	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		return fmt.Errorf("failed to create stdout pipe: %w", err)
+	}
 
 	go filterAndPrintQR(stdout)
 
