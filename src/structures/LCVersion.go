@@ -7,9 +7,9 @@ import (
 )
 
 type LCVersion struct {
-	Name       string
-	ManifestID string
-	LastDate   string
+	Name       string `json:"name"`
+	ManifestID string `json:"manifestID"`
+	LastDate   string `json:"lastDate"`
 }
 
 func (v LCVersion) Install(installationPath string) error {

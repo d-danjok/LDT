@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 )
 
-func ExtractToSteamFolder(locationPath string, archiveName string, assemblyName string, steamFolder string) error {
-	r, err := zip.OpenReader(filepath.Join(locationPath, archiveName))
+func Unzip(archivePath string, destPath string) error {
+	r, err := zip.OpenReader(archivePath)
 	if err != nil {
 		return err
 	}
@@ -25,10 +25,10 @@ func ExtractToSteamFolder(locationPath string, archiveName string, assemblyName 
 		if err != nil {
 			fmt.Printf("%s\n", err)
 		}
-	}(filepath.Join(locationPath, archiveName))
+	}(archivePath)
 
 	for _, f := range r.File {
-		path := filepath.Join(steamFolder, "steamapps/content/app_1966720", assemblyName, f.Name)
+		path := filepath.Join(destPath, f.Name)
 
 		if f.FileInfo().IsDir() {
 			os.MkdirAll(path, os.ModePerm)

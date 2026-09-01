@@ -12,7 +12,6 @@ func LocateSteamFolder() error {
 	var err error
 
 	if runtime.GOOS == "windows" {
-		definitions.SteamFolder = "C:\\Program Files (x86)\\Steam"
 		steamFolderLocated, err = Confirm("use default Steam folder location (" + definitions.SteamFolder + ")")
 		if err != nil {
 			return err

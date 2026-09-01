@@ -12,14 +12,14 @@ import (
 )
 
 type RemoteSrc struct {
-	RemoteType string
-	Url        string
+	RemoteType string `json:"remoteType"`
+	Url        string `json:"url"`
 }
 
 type Assembly struct {
-	Name                  string
-	BaseVersionManifestID string
-	Mods                  RemoteSrc
+	Name                  string    `json:"name"`
+	BaseVersionManifestID string    `json:"baseVersionManifestID"`
+	Mods                  RemoteSrc `json:"mods"`
 }
 
 func (a *Assembly) SetMods(remoteType string, remoteLink string) {
@@ -27,7 +27,7 @@ func (a *Assembly) SetMods(remoteType string, remoteLink string) {
 	a.Mods.Url = remoteLink
 }
 
-func (a *Assembly) downloadAll(tmpDirPath string, steamFolder string) error {
+func (a *Assembly) downloadAll(tmpDirPath string, destFolder string) error {
 	err := os.MkdirAll(tmpDirPath, os.ModePerm)
 	if err != nil {
 		return err
@@ -38,8 +38,7 @@ func (a *Assembly) downloadAll(tmpDirPath string, steamFolder string) error {
 	//download base
 	err = manifestDownload.DownloadManifest(
 		a.BaseVersionManifestID,
-		filepath.Join(steamFolder,
-			"steamapps/content/app_1966720",
+		filepath.Join(destFolder,
 			a.Name,
 		))
 
@@ -60,12 +59,12 @@ func (a *Assembly) downloadAll(tmpDirPath string, steamFolder string) error {
 	return nil
 }
 
-func (a *Assembly) Install(steamFolder string) error {
+func (a *Assembly) Install(destFolder string) error {
 	//ensure installation folder will be opened when installation finishes
 	defer func() {
 		var cmd *exec.Cmd
 		if runtime.GOOS == "windows" {
-			cmd = exec.Command("explorer", filepath.Join(steamFolder, "steamapps/content/app_1966720", a.Name))
+			cmd = exec.Command("explorer", filepath.Join(destFolder, a.Name))
 			// Run the command
 			_ = cmd.Start()
 
@@ -73,7 +72,7 @@ func (a *Assembly) Install(steamFolder string) error {
 	}()
 
 	//download base version and Mods
-	err := a.downloadAll(os.TempDir(), steamFolder)
+	err := a.downloadAll(os.TempDir(), destFolder)
 	if err != nil {
 		return err
 	}
@@ -83,7 +82,11 @@ func (a *Assembly) Install(steamFolder string) error {
 	}
 
 	//extract Mods to steam folder
-	err = extraction.ExtractToSteamFolder(os.TempDir(), "Mods.zip", a.Name, steamFolder)
+	err = extraction.Unzip(
+		filepath.Join(os.TempDir(), "Mods.zip"),
+		filepath.Join(destFolder, a.Name),
+	)
+
 	if err != nil {
 		return err
 	}
