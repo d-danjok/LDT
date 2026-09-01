@@ -5,3 +5,5 @@
 # go-winres generated
 *.syso
 winres/
+/node_modules/
+/build/
