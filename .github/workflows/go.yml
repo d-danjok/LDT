@@ -10,7 +10,7 @@ permissions:
 jobs:
   build:
     # Only run when PR is merged AND the source branch starts with "release"
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release')
+    if: (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release')) || contains(github.event.pull_request.title, 'test') 
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
