@@ -40,40 +40,7 @@ jobs:
         with:
           name: LDT-windows
       - name: Install NSIS
-        run: |
-          $nisisUrl = "https://sourceforge.net/projects/nsis/files/NSIS%203/3.09/nsis-3.09-setup.exe/download"
-          $nsisFile = "nsis-setup.exe"
-
-          # Download with retry logic
-          $maxRetries = 3
-          $retryCount = 0
-          $downloaded = $false
-
-          while ($retryCount -lt $maxRetries -and -not $downloaded) {
-            try {
-              Write-Host "Downloading NSIS (attempt $($retryCount + 1))..."
-              Invoke-WebRequest -Uri $nisisUrl -OutFile $nsisFile -UseBasicParsing
-
-              # Verify file exists and has reasonable size
-              if ((Test-Path $nsisFile) -and (Get-Item $nsisFile).Length -gt 1MB) {
-                $downloaded = $true
-                Write-Host "Download successful"
-              } else {
-                Write-Host "Downloaded file is too small or doesn't exist"
-                Remove-Item $nsisFile -ErrorAction SilentlyContinue
-              }
-            } catch {
-              Write-Host "Download failed: $_"
-            }
-            $retryCount++
-            if (-not $downloaded -and $retryCount -lt $maxRetries) { Start-Sleep -Seconds 5 }
-          }
-
-          if (-not $downloaded) {
-            throw "Failed to download NSIS after $maxRetries attempts"
-          }
-
-          Start-Process -FilePath $nsisFile -ArgumentList "/S" -Wait
+        run: choco install nsis --version=3.09 -y
       - name: Build installer
         run: |
           & "C:\Program Files (x86)\NSIS\makensis.exe" "LDT-installer.nsi"
