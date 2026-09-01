@@ -32,7 +32,7 @@ func pathOf(itemName string) string {
 	if err != nil {
 		panic(err)
 	}
-	return filepath.Join(execPath, "appdata/definitions/", itemName)
+	return filepath.Join(filepath.Dir(execPath), "appdata/definitions/", itemName)
 }
 
 func LoadConstants() error {
