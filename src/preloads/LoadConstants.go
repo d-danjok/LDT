@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -22,25 +23,37 @@ func readFromJSON(filePath string, dest any) error {
 	return nil
 }
 
+func pathOf(itemName string) string {
+	execPath, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	execPath, err = filepath.EvalSymlinks(execPath)
+	if err != nil {
+		panic(err)
+	}
+	return filepath.Join(execPath, "appdata/definitions/", itemName)
+}
+
 func LoadConstants() error {
-	err := readFromJSON("appdata/definitions/LCVersions.json", &definitions.LCVersions)
+	err := readFromJSON(pathOf("LCVersions.json"), &definitions.LCVersions)
 	if err != nil {
 		return err
 	}
 
-	err = readFromJSON("appdata/definitions/Assemblies.json", &definitions.Assemblies)
+	err = readFromJSON(pathOf("Assemblies.json"), &definitions.Assemblies)
 	if err != nil {
 		return err
 	}
 
-	unparced, err := os.ReadFile("appdata/definitions/general.def")
+	unparsed, err := os.ReadFile(pathOf("general.def"))
 	if err != nil {
 		return err
 	}
 	//need to split twice because windows standard on creating new line is \r\n, while UNIX-based systems use \n
-	fileLines := strings.Split(string(unparced), "\r\n")
+	fileLines := strings.Split(string(unparsed), "\r\n")
 	if len(fileLines) < 2 {
-		fileLines = strings.Split(string(unparced), "\n")
+		fileLines = strings.Split(string(unparsed), "\n")
 	}
 
 	for _, line := range fileLines {
