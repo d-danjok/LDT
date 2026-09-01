@@ -64,7 +64,14 @@ func installNewLCInstance() (string, error) {
 
 func installIntoExistingInstance() (string, error) {
 	fmt.Printf("Locate existing LC installation root folder")
-	installationPath, err := dialog.Directory().Title("Locate existing LC installation root folder").Browse()
+	installationPath, err := dialog.Directory().
+		Title("Locate existing LC installation root folder").
+		SetStartDir(
+			filepath.Join(
+				definitions.SteamFolder,
+				definitions.LCAssembliesDefFolderSubPath,
+			)).
+		Browse()
 
 	cli.ClearTerminal()
 
