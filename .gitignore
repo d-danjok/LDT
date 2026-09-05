@@ -1,9 +1,10 @@
-/src/icons/
-/LDT.exe
-.idea
-
 # go-winres generated
 *.syso
 winres/
+
+# else
+/src/icons/
+/LDT.exe
+.idea
 /node_modules/
 /build/
