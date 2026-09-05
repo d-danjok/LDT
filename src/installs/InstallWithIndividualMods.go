@@ -47,7 +47,7 @@ func installNewLCInstance() (string, error) {
 		scanner.Scan()
 		installationName = scanner.Text()
 
-		installationPath = filepath.Join(definitions.SteamFolder, "steamapps/content/app_1966720", lcVersion.Name+" "+installationName)
+		installationPath = filepath.Join(definitions.SteamFolder, definitions.LCAssembliesDefFolderSubPath, lcVersion.Name+" "+installationName)
 		if !fsManagement.Exists(installationPath) {
 			break
 		}
@@ -64,7 +64,14 @@ func installNewLCInstance() (string, error) {
 
 func installIntoExistingInstance() (string, error) {
 	fmt.Printf("Locate existing LC installation root folder")
-	installationPath, err := dialog.Directory().Title("Locate existing LC installation root folder").Browse()
+	installationPath, err := dialog.Directory().
+		Title("Locate existing LC installation root folder").
+		SetStartDir(
+			filepath.Join(
+				definitions.SteamFolder,
+				definitions.LCAssembliesDefFolderSubPath,
+			)).
+		Browse()
 
 	cli.ClearTerminal()
 
