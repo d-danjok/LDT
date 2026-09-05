@@ -5,7 +5,7 @@ import (
 	"LDT/src/structures"
 )
 
-func PreloadAssemblyList() {
+func CreateAssembliesFromLCVersions() {
 
 	//convert plain versions into individual non modded assemblies
 	for _, lcVersion := range definitions.LCVersions {

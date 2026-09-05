@@ -1,7 +1,7 @@
 name: Go
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "versions/*", "danjok/testbuilds/*"]
     types: [ closed ]
 
 permissions:
@@ -10,7 +10,7 @@ permissions:
 jobs:
   build:
     # Only run when PR is merged AND the source branch starts with "release"
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release')
+    if: (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release')) || contains(github.event.pull_request.title, 'test') 
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,26 +24,52 @@ jobs:
         run: go-winres simply --icon src/icons/mimi-icon.png
       - name: Build
         run: go build -ldflags="-s -w" -o LDT.exe .
-      - name: Upload artifact
+      - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
           name: LDT-windows
           path: LDT.exe
 
-  release:
+  installer:
     needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download binary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LDT-windows
+      - name: Install NSIS
+        run: choco install nsis --version=3.09 -y
+      - name: Build installer
+        run: |
+          & "C:\Program Files (x86)\NSIS\makensis.exe" "LDT-installer.nsi"
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LDT-installer
+          path: LDT-installer.exe
+
+  release:
+    needs: [build, installer]
     runs-on: windows-latest
     permissions:
       contents: write
     steps:
-      - name: Download artifact
+      - name: Download binary artifact
         uses: actions/download-artifact@v4
         with:
           name: LDT-windows
+      - name: Download installer artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LDT-installer
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: LDT.exe
+          files: |
+            LDT.exe
+            LDT-installer.exe
           generate_release_notes: true
           tag_name: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -18,7 +18,12 @@ func main() {
 	}
 	cli.ClearTerminal()
 
-	preloads.PreloadAssemblyList()
+	err := preloads.LoadConstants()
+	if err != nil {
+		fmt.Printf("Error loading constants: %v\n", err)
+		return
+	}
+	preloads.CreateAssembliesFromLCVersions()
 
 	installationModes := []string{"" +
 		"Complete assembly installation \n " +

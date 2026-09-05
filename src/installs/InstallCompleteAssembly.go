@@ -4,6 +4,7 @@ import (
 	definitions "LDT/src"
 	"LDT/src/cli"
 	"fmt"
+	"path/filepath"
 )
 
 func InstallCompleteAssembly() error {
@@ -19,7 +20,7 @@ func InstallCompleteAssembly() error {
 
 	fmt.Printf("Installing %s", assemblyToInstall.Name)
 
-	err = assemblyToInstall.Install(definitions.SteamFolder)
+	err = assemblyToInstall.Install(filepath.Join(definitions.SteamFolder, definitions.LCAssembliesDefFolderSubPath))
 	if err != nil {
 		return fmt.Errorf("installation failed: %v", err)
 	}
