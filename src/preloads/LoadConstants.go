@@ -1,11 +1,10 @@
 package preloads
 
 import (
-	definitions "LDT/src"
+	definitions "LDT/src/programScopeData"
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -24,29 +23,30 @@ func readFromJSON(filePath string, dest any) error {
 }
 
 func pathOf(itemName string) string {
-	execPath, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-	execPath, err = filepath.EvalSymlinks(execPath)
-	if err != nil {
-		panic(err)
-	}
-	return filepath.Join(filepath.Dir(execPath), "appdata/definitions/", itemName)
+	//execPath, err := os.Executable()
+	//if err != nil {
+	//	panic(err)
+	//}
+	//execPath, err = filepath.EvalSymlinks(execPath)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//return filepath.Join(filepath.Dir(execPath), itemName)
+	return itemName
 }
 
 func LoadConstants() error {
-	err := readFromJSON(pathOf("LCVersions.json"), &definitions.LCVersions)
+	err := readFromJSON(pathOf("appdata/definitions/LCVersions.json"), &definitions.LCVersions)
 	if err != nil {
 		return err
 	}
 
-	err = readFromJSON(pathOf("Assemblies.json"), &definitions.Assemblies)
+	err = readFromJSON(pathOf("appdata/definitions/Assemblies.json"), &definitions.Assemblies)
 	if err != nil {
 		return err
 	}
 
-	unparsed, err := os.ReadFile(pathOf("general.def"))
+	unparsed, err := os.ReadFile(pathOf("appdata/definitions/general.def"))
 	if err != nil {
 		return err
 	}

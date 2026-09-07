@@ -1,8 +1,8 @@
 package preloads
 
 import (
-	definitions "LDT/src"
-	"LDT/src/structures"
+	definitions "LDT/src/programScopeData"
+	"LDT/src/structures/definitionHoldStructures"
 )
 
 func CreateAssembliesFromLCVersions() {
@@ -10,7 +10,7 @@ func CreateAssembliesFromLCVersions() {
 	//convert plain versions into individual non modded assemblies
 	for _, lcVersion := range definitions.LCVersions {
 		definitions.Assemblies = append(definitions.Assemblies,
-			structures.Assembly{
+			definitionHoldStructures.Assembly{
 				Name:                  lcVersion.Name + " Non-modded",
 				BaseVersionManifestID: lcVersion.ManifestID,
 			},

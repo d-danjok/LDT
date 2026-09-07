@@ -1,9 +1,9 @@
-package structures
+package definitionHoldStructures
 
 import (
-	"LDT/src/download"
-	"LDT/src/extraction"
-	"LDT/src/manifestDownload"
+	"LDT/src/functions/download"
+	"LDT/src/functions/extraction"
+	"LDT/src/functions/manifestDownload"
 	"fmt"
 	"os"
 	"os/exec"

@@ -1,7 +1,7 @@
-package structures
+package definitionHoldStructures
 
 import (
-	"LDT/src/manifestDownload"
+	"LDT/src/functions/manifestDownload"
 	"fmt"
 	"os"
 )

@@ -1,14 +1,14 @@
 package cli
 
 import (
-	definitions "LDT/src"
-	"LDT/src/structures"
+	definitions "LDT/src/programScopeData"
+	"LDT/src/structures/definitionHoldStructures"
 )
 
-func SelectAssemblyToInstall() (structures.Assembly, error) {
+func SelectAssemblyToInstall() (definitionHoldStructures.Assembly, error) {
 	assemblyNum, err := SelectByNum("assembly you want to install", len(definitions.Assemblies), ListAvailableAssemblies, nil)
 	if err != nil {
-		return structures.Assembly{}, err
+		return definitionHoldStructures.Assembly{}, err
 	}
 
 	return definitions.Assemblies[assemblyNum], nil

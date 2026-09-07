@@ -1,6 +1,7 @@
 package manifestDownload
 
 import (
+	"LDT/src/programScopeData/mutableData"
 	"bufio"
 	"fmt"
 	"io"
@@ -10,6 +11,16 @@ import (
 
 	"golang.org/x/sys/windows"
 )
+
+func parseSteamLoginFromDeportDownloaderConfirmationMsg(msg string) {
+	msgParts := strings.Split(msg, " ")
+	for i, part := range msgParts {
+		if part == "-username" {
+			mutableData.UserData.SteamLogin = msgParts[i+1]
+			break
+		}
+	}
+}
 
 // filterAndPrintQR reads DepotDownloader stderr and prints only the QR block
 func filterAndPrintQR(r io.Reader) {
@@ -21,8 +32,10 @@ func filterAndPrintQR(r io.Reader) {
 		windows.SetConsoleCP(65001)
 	}
 
+	var line string
 	for scanner.Scan() {
-		line := scanner.Text()
+		prevLine := line
+		line = scanner.Text()
 
 		// DepotDownloader prints "Scan the QR code" before the block
 		if strings.Contains(line, "QR") || strings.Contains(line, "qr") {
@@ -36,6 +49,11 @@ func filterAndPrintQR(r io.Reader) {
 			// Empty line after the QR block signals it's done
 			if strings.Contains(line, "Done!") {
 				inQRBlock = false
+
+				parseSteamLoginFromDeportDownloaderConfirmationMsg(prevLine)
+
+				fmt.Printf("%s\n", mutableData.UserData.SteamLogin)
+
 				continue
 			}
 			fmt.Println(line)
@@ -54,6 +72,9 @@ func runDepotDownloader(args ...string) error {
 	cmd := exec.Command(binaryPath, args...)
 
 	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		return fmt.Errorf("failed to get stdout pipe: %w", err)
+	}
 
 	go filterAndPrintQR(stdout)
 
@@ -63,6 +84,17 @@ func runDepotDownloader(args ...string) error {
 // DownloadManifest downloads a specific depot manifest using DepotDownloader.
 // App ID: 1966720, Depot ID: 1966721
 func DownloadManifest(manifestID string, destDir string) error {
+	if mutableData.UserData.SteamLogin != "" {
+		return runDepotDownloader(
+			"-app", "1966720",
+			"-depot", "1966721",
+			"-manifest", manifestID,
+			"-dir", destDir,
+			"-username", mutableData.UserData.SteamLogin,
+			"-remember-password",
+		)
+	}
+
 	return runDepotDownloader(
 		"-app", "1966720",
 		"-depot", "1966721",

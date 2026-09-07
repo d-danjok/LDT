@@ -1,6 +1,8 @@
 package definitions
 
-import "LDT/src/structures"
+import (
+	"LDT/src/structures/definitionHoldStructures"
+)
 
 // manifestIDs for versions download
 const (
@@ -13,7 +15,7 @@ const (
 
 var SteamFolder string
 var LCAssembliesDefFolderSubPath string
-var Assemblies []structures.Assembly
-var LCVersions []structures.LCVersion
+var Assemblies []definitionHoldStructures.Assembly
+var LCVersions []definitionHoldStructures.LCVersion
 
 var CleanMode = true

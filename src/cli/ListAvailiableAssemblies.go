@@ -1,7 +1,7 @@
 package cli
 
 import (
-	definitions "LDT/src"
+	definitions "LDT/src/programScopeData"
 	"fmt"
 )
 

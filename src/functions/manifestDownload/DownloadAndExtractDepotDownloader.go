@@ -1,7 +1,7 @@
 package manifestDownload
 
 import (
-	"LDT/src/fsManagement"
+	"LDT/src/functions/fsManagement"
 	"archive/zip"
 	"fmt"
 	"io"

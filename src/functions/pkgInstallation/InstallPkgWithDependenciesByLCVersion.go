@@ -1,8 +1,8 @@
 package pkgInstallation
 
 import (
-	downloads "LDT/src/download"
-	"LDT/src/structures"
+	"LDT/src/functions/download"
+	"LDT/src/structures/definitionHoldStructures"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -117,7 +117,7 @@ func getPkg(author, name, version string) (Version, error) {
 	return ver, nil
 }
 
-func getMaxPkgDateByLCVersion(version structures.LCVersion) (time.Time, error) {
+func getMaxPkgDateByLCVersion(version definitionHoldStructures.LCVersion) (time.Time, error) {
 	var maxDate time.Time
 	var err error
 
@@ -216,7 +216,7 @@ func installDependencies(dependencies []string, destPath string, maxDate time.Ti
 	return nil
 }
 
-func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersion structures.LCVersion) error {
+func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersion definitionHoldStructures.LCVersion) error {
 	parsedURL, err := url.Parse(link)
 	if err != nil {
 		return err

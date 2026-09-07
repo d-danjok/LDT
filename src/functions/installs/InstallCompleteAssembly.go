@@ -1,8 +1,8 @@
 package installs
 
 import (
-	definitions "LDT/src"
 	"LDT/src/cli"
+	definitions "LDT/src/programScopeData"
 	"fmt"
 	"path/filepath"
 )

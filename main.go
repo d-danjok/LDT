@@ -1,10 +1,10 @@
 package main
 
 import (
-	definitions "LDT/src"
 	"LDT/src/cli"
-	"LDT/src/installs"
+	"LDT/src/functions/installs"
 	"LDT/src/preloads"
+	definitions "LDT/src/programScopeData"
 	"errors"
 	"fmt"
 	"os"

@@ -1,11 +1,11 @@
 package installs
 
 import (
-	definitions "LDT/src"
 	"LDT/src/cli"
-	"LDT/src/fsManagement"
-	"LDT/src/pkgInstallation"
-	"LDT/src/structures"
+	"LDT/src/functions/fsManagement"
+	pkgInstallation2 "LDT/src/functions/pkgInstallation"
+	definitions "LDT/src/programScopeData"
+	"LDT/src/structures/definitionHoldStructures"
 	"bufio"
 	"fmt"
 	"net/url"
@@ -18,7 +18,7 @@ import (
 	"github.com/sqweek/dialog"
 )
 
-var lcVersion structures.LCVersion
+var lcVersion definitionHoldStructures.LCVersion
 
 func installNewLCInstance() (string, error) {
 	var installationName string
@@ -88,7 +88,7 @@ func installIntoExistingInstance() (string, error) {
 		}
 		switch installedModsTreatmentType {
 		case 0:
-			pkgInstallation.BepInExInstalled = true
+			pkgInstallation2.BepInExInstalled = true
 		case 1:
 			err = os.RemoveAll(filepath.Join(installationPath, "BepInEx"))
 			if err != nil {
@@ -157,7 +157,7 @@ func installMods(lcLocationPath string) error {
 			continue
 		}
 
-		err = pkgInstallation.InstallPkgWithDependenciesByLCVersion(link, lcLocationPath, lcVersion)
+		err = pkgInstallation2.InstallPkgWithDependenciesByLCVersion(link, lcLocationPath, lcVersion)
 		if err != nil {
 			fmt.Printf("Failed to install mod ")
 			if confirmation, err := cli.Confirm("continue"); confirmation && err != nil {

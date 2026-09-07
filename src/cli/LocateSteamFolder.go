@@ -1,8 +1,8 @@
 package cli
 
 import (
-	definitions "LDT/src"
 	"LDT/src/gui"
+	definitions "LDT/src/programScopeData"
 	"fmt"
 	"runtime"
 )
