@@ -1,6 +1,7 @@
 package manifestDownload
 
 import (
+	"LDT/src/fsManagement"
 	"archive/zip"
 	"fmt"
 	"io"
@@ -34,7 +35,7 @@ func DownloadAndExtractDepotDownloader() (string, error) {
 	binaryPath := filepath.Join(os.TempDir(), getDepotDownloaderBinaryName())
 
 	// Already exists, skip download
-	if _, err := os.Stat(binaryPath); err == nil {
+	if fsManagement.Exists(binaryPath) {
 		return binaryPath, nil
 	}
 
