@@ -10,3 +10,4 @@ winres/
 /build/bin
 /frontend/dist
 /appdata/userdata/
+/frontend/node_modules/
