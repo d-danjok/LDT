@@ -1,10 +1,11 @@
 package installs
 
 import (
+	definitions "LDT/src/appdata"
+	"LDT/src/appdata/userdata"
 	"LDT/src/cli"
-	"LDT/src/functions/fsManagement"
+	"LDT/src/functions/fileManagement"
 	pkgInstallation2 "LDT/src/functions/pkgInstallation"
-	definitions "LDT/src/programScopeData"
 	"LDT/src/structures/definitionHoldStructures"
 	"bufio"
 	"fmt"
@@ -47,8 +48,8 @@ func installNewLCInstance() (string, error) {
 		scanner.Scan()
 		installationName = scanner.Text()
 
-		installationPath = filepath.Join(definitions.SteamFolder, definitions.LCAssembliesDefFolderSubPath, lcVersion.Name+" "+installationName)
-		if !fsManagement.Exists(installationPath) {
+		installationPath = filepath.Join(userdata.General.SteamFolderLocation, definitions.LCAssembliesDefFolderSubPath, lcVersion.Name+" "+installationName)
+		if !fileManagement.Exists(installationPath) {
 			break
 		}
 		fmt.Printf("There is an assembly with the same name, select different name\n\n")
@@ -68,14 +69,14 @@ func installIntoExistingInstance() (string, error) {
 		Title("Locate existing LC installation root folder").
 		SetStartDir(
 			filepath.Join(
-				definitions.SteamFolder,
+				userdata.General.SteamFolderLocation,
 				definitions.LCAssembliesDefFolderSubPath,
 			)).
 		Browse()
 
 	cli.ClearTerminal()
 
-	if fsManagement.Exists(filepath.Join(installationPath, "BepInEx")) {
+	if fileManagement.Exists(filepath.Join(installationPath, "BepInEx")) {
 		fmt.Printf("LC installation you have located already has some mods installed\n")
 
 		installedModsTreatmentType, err := cli.SelectByNum("new mod installation type",

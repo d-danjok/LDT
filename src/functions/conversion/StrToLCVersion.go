@@ -1,8 +1,8 @@
 package conversion
 
 import (
+	definitions "LDT/src/appdata"
 	"LDT/src/functions/common"
-	definitions "LDT/src/programScopeData"
 	"LDT/src/structures/definitionHoldStructures"
 	"fmt"
 )

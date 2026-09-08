@@ -1,8 +1,9 @@
 package installs
 
 import (
+	definitions "LDT/src/appdata"
+	"LDT/src/appdata/userdata"
 	"LDT/src/cli"
-	definitions "LDT/src/programScopeData"
 	"fmt"
 	"path/filepath"
 )
@@ -20,7 +21,7 @@ func InstallCompleteAssembly() error {
 
 	fmt.Printf("Installing %s", assemblyToInstall.Name)
 
-	err = assemblyToInstall.Install(filepath.Join(definitions.SteamFolder, definitions.LCAssembliesDefFolderSubPath))
+	err = assemblyToInstall.Install(filepath.Join(userdata.General.SteamFolderLocation, definitions.LCAssembliesDefFolderSubPath))
 	if err != nil {
 		return fmt.Errorf("installation failed: %v", err)
 	}

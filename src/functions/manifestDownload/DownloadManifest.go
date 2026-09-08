@@ -1,7 +1,7 @@
 package manifestDownload
 
 import (
-	"LDT/src/programScopeData/mutableData"
+	"LDT/src/appdata/userdata"
 	"bufio"
 	"fmt"
 	"io"
@@ -16,7 +16,7 @@ func parseSteamLoginFromDeportDownloaderConfirmationMsg(msg string) {
 	msgParts := strings.Split(msg, " ")
 	for i, part := range msgParts {
 		if part == "-username" {
-			mutableData.UserData.SteamLogin = msgParts[i+1]
+			userdata.General.SteamLogin = msgParts[i+1]
 			break
 		}
 	}
@@ -52,8 +52,6 @@ func filterAndPrintQR(r io.Reader) {
 
 				parseSteamLoginFromDeportDownloaderConfirmationMsg(prevLine)
 
-				fmt.Printf("%s\n", mutableData.UserData.SteamLogin)
-
 				continue
 			}
 			fmt.Println(line)
@@ -84,13 +82,13 @@ func runDepotDownloader(args ...string) error {
 // DownloadManifest downloads a specific depot manifest using DepotDownloader.
 // App ID: 1966720, Depot ID: 1966721
 func DownloadManifest(manifestID string, destDir string) error {
-	if mutableData.UserData.SteamLogin != "" {
+	if userdata.General.SteamLogin != "" {
 		return runDepotDownloader(
 			"-app", "1966720",
 			"-depot", "1966721",
 			"-manifest", manifestID,
 			"-dir", destDir,
-			"-username", mutableData.UserData.SteamLogin,
+			"-username", userdata.General.SteamLogin,
 			"-remember-password",
 		)
 	}

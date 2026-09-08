@@ -1,7 +1,7 @@
-package preloads
+package appdataHandling
 
 import (
-	definitions "LDT/src/programScopeData"
+	definitions "LDT/src/appdata"
 	"LDT/src/structures/definitionHoldStructures"
 )
 

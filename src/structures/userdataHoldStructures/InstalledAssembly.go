@@ -12,8 +12,3 @@ type InstalledAssembly struct {
 	LCVersion         string    `json:"lcVersion"`
 	InstalledPackages []Package `json:"installedPackages"`
 }
-
-func (a InstalledAssembly) Launch() {
-
-	return
-}

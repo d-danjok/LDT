@@ -1,9 +1,8 @@
 package gui
 
 import (
-	definitions "LDT/src/programScopeData"
+	"LDT/src/appdata/userdata"
 	"fmt"
-	"path/filepath"
 
 	"github.com/sqweek/dialog"
 )
@@ -11,19 +10,17 @@ import (
 func BrowseForSteamFolder() error {
 	var err error
 
-	definitions.SteamFolder, err = dialog.Directory().
+	userdata.General.SteamFolderLocation, err = dialog.Directory().
 		Title("Select steam folder").
-		SetStartDir(
-			filepath.Join(
-				definitions.SteamFolder,
-				definitions.LCAssembliesDefFolderSubPath,
-			)).
 		Browse()
 
 	if err != nil {
 		return err
 	}
 	fmt.Printf("\n Steam folder located successfully\n")
+
+	a := userdata.General
+	_ = a
 
 	return nil
 }

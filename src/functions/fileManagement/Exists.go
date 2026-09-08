@@ -1,4 +1,4 @@
-package fsManagement
+package fileManagement
 
 import (
 	"os"
