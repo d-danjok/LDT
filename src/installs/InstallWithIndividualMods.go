@@ -2,7 +2,6 @@ package installs
 
 import (
 	definitions "LDT/src/appdata"
-	"LDT/src/appdata/userdata"
 	"LDT/src/cli"
 	"LDT/src/functions/fileManagement"
 	pkgInstallation2 "LDT/src/functions/pkgInstallation"
@@ -34,13 +33,6 @@ func installNewLCInstance() (string, error) {
 
 	cli.ClearTerminal()
 
-	err = cli.LocateSteamFolder()
-	if err != nil {
-		return "", fmt.Errorf("error locating Steam folder: %v", err)
-	}
-
-	cli.ClearTerminal()
-
 	fmt.Printf("How do you want you installation to be named?\n")
 	scanner := bufio.NewScanner(os.Stdin)
 	for true {
@@ -48,7 +40,7 @@ func installNewLCInstance() (string, error) {
 		scanner.Scan()
 		installationName = scanner.Text()
 
-		installationPath = filepath.Join(userdata.General.SteamFolderLocation, definitions.LCAssembliesDefFolderSubPath, lcVersion.Name+" "+installationName)
+		installationPath = filepath.Join(fileManagement.GetPathInAppData("assemblies"), lcVersion.Name+" "+installationName)
 		if !fileManagement.Exists(installationPath) {
 			break
 		}
@@ -69,8 +61,7 @@ func installIntoExistingInstance() (string, error) {
 		Title("Locate existing LC installation root folder").
 		SetStartDir(
 			filepath.Join(
-				userdata.General.SteamFolderLocation,
-				definitions.LCAssembliesDefFolderSubPath,
+				fileManagement.GetPathInAppData("assemblies"),
 			)).
 		Browse()
 

@@ -69,6 +69,8 @@ func runDepotDownloader(args ...string) error {
 
 	cmd := exec.Command(binaryPath, args...)
 
+	//cmd.Stderr = os.Stderr //uncomment only when debugging
+
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		return fmt.Errorf("failed to get stdout pipe: %w", err)
@@ -82,8 +84,11 @@ func runDepotDownloader(args ...string) error {
 // DownloadManifest downloads a specific depot manifest using DepotDownloader.
 // App ID: 1966720, Depot ID: 1966721
 func DownloadManifest(manifestID string, destDir string) error {
+	login := userdata.General.SteamLogin
+	_ = login
+
 	if userdata.General.SteamLogin != "" {
-		return runDepotDownloader(
+		err := runDepotDownloader(
 			"-app", "1966720",
 			"-depot", "1966721",
 			"-manifest", manifestID,
@@ -91,6 +96,9 @@ func DownloadManifest(manifestID string, destDir string) error {
 			"-username", userdata.General.SteamLogin,
 			"-remember-password",
 		)
+		if err == nil { //if previous login failed for some reason, try again with QR code auth
+			return nil
+		}
 	}
 
 	return runDepotDownloader(
@@ -99,5 +107,6 @@ func DownloadManifest(manifestID string, destDir string) error {
 		"-manifest", manifestID,
 		"-dir", destDir,
 		"-qr",
+		"-remember-password",
 	)
 }

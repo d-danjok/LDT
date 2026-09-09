@@ -1,11 +1,9 @@
 package installs
 
 import (
-	definitions "LDT/src/appdata"
-	"LDT/src/appdata/userdata"
 	"LDT/src/cli"
+	"LDT/src/functions/fileManagement"
 	"fmt"
-	"path/filepath"
 )
 
 func InstallCompleteAssembly() error {
@@ -14,14 +12,11 @@ func InstallCompleteAssembly() error {
 		return fmt.Errorf("error selecting assembly to install: %v", err)
 	}
 
-	err = cli.LocateSteamFolder()
-	if err != nil {
-		return fmt.Errorf("error locating Steam folder: %v", err)
-	}
+	cli.ClearTerminal()
 
 	fmt.Printf("Installing %s", assemblyToInstall.Name)
 
-	err = assemblyToInstall.Install(filepath.Join(userdata.General.SteamFolderLocation, definitions.LCAssembliesDefFolderSubPath))
+	err = assemblyToInstall.Install(fileManagement.GetPathInAppData("assemblies"))
 	if err != nil {
 		return fmt.Errorf("installation failed: %v", err)
 	}

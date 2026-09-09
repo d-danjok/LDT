@@ -4,8 +4,8 @@ import (
 	definitions "LDT/src/appdata"
 	"LDT/src/appdataHandling"
 	"LDT/src/cli"
-	"LDT/src/functions/installs"
 	"LDT/src/gui"
+	installs2 "LDT/src/installs"
 	"embed"
 	"errors"
 	"fmt"
@@ -38,9 +38,9 @@ func runCLI() error {
 
 	switch installationMode {
 	case 0:
-		err = installs.InstallCompleteAssembly()
+		err = installs2.InstallCompleteAssembly()
 	case 1:
-		err = installs.InstallWithIndividualMods()
+		err = installs2.InstallWithIndividualMods()
 	default:
 		err = errors.New("invalid installation type")
 	}

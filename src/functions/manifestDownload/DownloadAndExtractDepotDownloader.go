@@ -1,8 +1,8 @@
 package manifestDownload
 
 import (
+	"LDT/src/functions/extraction"
 	"LDT/src/functions/fileManagement"
-	"archive/zip"
 	"fmt"
 	"io"
 	"net/http"
@@ -32,7 +32,7 @@ func getDepotDownloaderBinaryName() string {
 
 // DownloadAndExtractDepotDownloader downloads the binary into Temp folder
 func DownloadAndExtractDepotDownloader() (string, error) {
-	binaryPath := filepath.Join(os.TempDir(), getDepotDownloaderBinaryName())
+	binaryPath := filepath.Join(fileManagement.GetPathInAppData("depotDownloader"), getDepotDownloaderBinaryName())
 
 	// Already exists, skip download
 	if fileManagement.Exists(binaryPath) {
@@ -54,14 +54,16 @@ func DownloadAndExtractDepotDownloader() (string, error) {
 		return "", fmt.Errorf("failed to create zip: %w", err)
 	}
 
-	if _, err = io.Copy(out, resp.Body); err != nil {
+	_, err = io.Copy(out, resp.Body)
+	if err != nil {
 		out.Close()
 		return "", fmt.Errorf("failed to save zip: %w", err)
 	}
 	out.Close()
 
 	// Extract zip
-	if err := unzip(zipPath, os.TempDir()); err != nil {
+	err = extraction.Unzip(zipPath, filepath.Dir(binaryPath))
+	if err != nil {
 		return "", fmt.Errorf("failed to extract: %w", err)
 	}
 	os.Remove(zipPath)
@@ -73,44 +75,4 @@ func DownloadAndExtractDepotDownloader() (string, error) {
 
 	fmt.Println("DepotDownloader ready at:", binaryPath)
 	return binaryPath, nil
-}
-
-func unzip(src, dest string) error {
-	r, err := zip.OpenReader(src)
-	if err != nil {
-		return err
-	}
-	defer r.Close()
-
-	for _, f := range r.File {
-		path := filepath.Join(dest, f.Name)
-
-		if f.FileInfo().IsDir() {
-			os.MkdirAll(path, 0755)
-			continue
-		}
-
-		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
-			return err
-		}
-
-		out, err := os.Create(path)
-		if err != nil {
-			return err
-		}
-
-		rc, err := f.Open()
-		if err != nil {
-			out.Close()
-			return err
-		}
-
-		_, err = io.Copy(out, rc)
-		rc.Close()
-		out.Close()
-		if err != nil {
-			return err
-		}
-	}
-	return nil
 }

@@ -11,3 +11,5 @@ winres/
 /frontend/dist
 /appdata/userdata/
 /frontend/node_modules/
+/appdata/depotDownloader/
+/appdata/assemblies/

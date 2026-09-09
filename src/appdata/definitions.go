@@ -13,8 +13,6 @@ const (
 	V73ManifestID string = "1749099131234587692"
 )
 
-var SteamFolder string
-var LCAssembliesDefFolderSubPath string
 var Assemblies []definitionHoldStructures.Assembly
 var LCVersions []definitionHoldStructures.LCVersion
 
