@@ -78,19 +78,11 @@ https://thunderstore.io/c/lethal-company/p/BepInEx/BepInExPack/
 
 ## Build and run
 
-This project uses Go and Wails.
+This project uses Go
 
 ```bash
-go mod download
-wails build
+go build
 ```
-
-For local development with the frontend:
-
-```bash
-wails dev
-```
-
 ## Project purpose
 
 The original motivation was to make older Lethal Company mod setups easier to install and debug, especially when dependencies and version compatibility become complicated. LDT is meant to reduce that complexity and make mod installation safer and more repeatable.
