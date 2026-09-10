@@ -15,6 +15,7 @@ RequestExecutionLevel admin
 ; MUI Settings
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_LICENSE "LICENSE"
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
@@ -25,7 +26,7 @@ Section "LDT Application"
   SetOutPath "$INSTDIR"
   
   ; Copy the main executable
-  File "LDT.exe"
+  File "build\bin\LDT.exe"
   
   ; Create and copy appdata folder
   SetOutPath "$INSTDIR\appdata\definitions"
