@@ -111,7 +111,7 @@ func getPkg(author, name, version string) (Version, error) {
 	defer resp.Body.Close()
 
 	var ver Version
-	if err := json.NewDecoder(resp.Body).Decode(&ver); err != nil {
+	if err = json.NewDecoder(resp.Body).Decode(&ver); err != nil {
 		return Version{}, err
 	}
 	return ver, nil
