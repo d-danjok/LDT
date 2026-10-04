@@ -4,4 +4,4 @@ import (
 	"LDT/src/structures/assemblyDataHoldStructures"
 )
 
-var CurrentAssembly assemblyDataHoldStructures.InstalledAssembly
+var CurrentAssembly assemblyDataHoldStructures.Assembly

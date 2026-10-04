@@ -5,6 +5,6 @@ import (
 	"LDT/src/structures/assemblyDataHoldStructures"
 )
 
-func GetCurrentAssembly() assemblyDataHoldStructures.InstalledAssembly {
+func GetCurrentAssembly() assemblyDataHoldStructures.Assembly {
 	return assemblyData.CurrentAssembly
 }

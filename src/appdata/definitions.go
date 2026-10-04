@@ -13,7 +13,7 @@ const (
 	V73ManifestID string = "1749099131234587692"
 )
 
-var Assemblies []definitionHoldStructures.Assembly
 var LCVersions []definitionHoldStructures.LCVersion
 
 var CleanMode = true
+var IsFirstLaunch bool

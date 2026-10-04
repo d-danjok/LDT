@@ -15,14 +15,14 @@ type Package struct {
 	Author string `json:"author"`
 }
 
-type InstalledAssembly struct {
+type Assembly struct {
 	Name              string    `json:"name"`
 	LocationPath      string    `json:"locationPath"`
 	LCVersion         string    `json:"lcVersion"`
 	InstalledPackages []Package `json:"installedPackages"`
 }
 
-func (a InstalledAssembly) GetCode() string {
+func (a Assembly) GetCode() string {
 	code := a.LCVersion
 	for _, pkg := range a.InstalledPackages {
 		code += fmt.Sprintf(":%s-%s", pkg.Author, pkg.Name)
@@ -30,7 +30,7 @@ func (a InstalledAssembly) GetCode() string {
 	return code
 }
 
-func (a InstalledAssembly) CreateFromCode(code string, locationPath string) {
+func (a Assembly) CreateFromCode(code string, locationPath string) {
 	a.LocationPath = locationPath
 	parts := strings.Split(code, ":")
 	a.LCVersion = parts[0]
@@ -45,7 +45,7 @@ func (a InstalledAssembly) CreateFromCode(code string, locationPath string) {
 	return
 }
 
-func (a InstalledAssembly) Install() error {
+func (a Assembly) Install() error {
 	versionToDownload, err := conversion.StrToLCVersion(a.LCVersion)
 	if err != nil {
 		return err
@@ -69,7 +69,7 @@ func (a InstalledAssembly) Install() error {
 	return nil
 }
 
-func (a InstalledAssembly) Launch() error {
+func (a Assembly) Launch() error {
 	binaryPath := filepath.Join(a.LocationPath, fmt.Sprintf("%s %s", a.LCVersion, a.Name))
 	cmd := exec.Command(binaryPath)
 

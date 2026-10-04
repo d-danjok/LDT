@@ -117,7 +117,7 @@ func getPkg(author, name, version string) (Version, error) {
 	return ver, nil
 }
 
-func getMaxPkgDateByLCVersion(version definitionHoldStructures.LCVersion) (time.Time, error) {
+func GetMaxPkgDateByLCVersion(version definitionHoldStructures.LCVersion) (time.Time, error) {
 	var maxDate time.Time
 	var err error
 
@@ -132,9 +132,9 @@ func getMaxPkgDateByLCVersion(version definitionHoldStructures.LCVersion) (time.
 	return formDate(version.LastDate)
 }
 
-// resolveAndInstallPkg finds the latest Version of a package released before
+// ResolveAndInstallPkg finds the latest Version of a package released before
 // maxDate, downloads it, installs it, and returns its dependencies.
-func resolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time) ([]string, error) {
+func ResolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time) ([]string, error) {
 	fullName := pkgAuthor + "-" + pkgName
 
 	pkgVersions, err := GetVersionDates(pkgAuthor, pkgName)
@@ -196,19 +196,19 @@ func resolveAndInstallPkg(pkgAuthor, pkgName, destPath string, maxDate time.Time
 	return pkgInfo.Dependencies, nil
 }
 
-func installDependencies(dependencies []string, destPath string, maxDate time.Time) error {
+func InstallDependencies(dependencies []string, destPath string, maxDate time.Time) error {
 	for _, dependency := range dependencies {
 		nameParts := strings.Split(dependency, "-")
 
 		pkgAuthor := nameParts[0]
 		pkgName := nameParts[1]
 
-		deps, err := resolveAndInstallPkg(pkgAuthor, pkgName, destPath, maxDate)
+		deps, err := ResolveAndInstallPkg(pkgAuthor, pkgName, destPath, maxDate)
 		if err != nil {
 			return err
 		}
 
-		if err = installDependencies(deps, destPath, maxDate); err != nil {
+		if err = InstallDependencies(deps, destPath, maxDate); err != nil {
 			return err
 		}
 	}
@@ -232,15 +232,15 @@ func InstallPkgWithDependenciesByLCVersion(link string, destPath string, LCVersi
 	pkgName := linkPathParts[len(linkPathParts)-1-partShift]
 	pkgAuthor := linkPathParts[len(linkPathParts)-2-partShift]
 
-	maxPkgDate, err := getMaxPkgDateByLCVersion(LCVersion)
+	maxPkgDate, err := GetMaxPkgDateByLCVersion(LCVersion)
 	if err != nil {
 		return err
 	}
 
-	deps, err := resolveAndInstallPkg(pkgAuthor, pkgName, destPath, maxPkgDate)
+	deps, err := ResolveAndInstallPkg(pkgAuthor, pkgName, destPath, maxPkgDate)
 	if err != nil {
 		return err
 	}
 
-	return installDependencies(deps, destPath, maxPkgDate)
+	return InstallDependencies(deps, destPath, maxPkgDate)
 }

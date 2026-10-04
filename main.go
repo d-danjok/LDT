@@ -7,7 +7,6 @@ import (
 	"LDT/src/gui"
 	installs2 "LDT/src/installs"
 	"embed"
-	"errors"
 	"fmt"
 	"os"
 
@@ -19,31 +18,14 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
+func runCLINew() error {
+	return cli.Main()
+}
+
 func runCLI() error {
 	cli.ClearTerminal()
 
-	installationModes := []string{"" +
-		"Complete assembly installation \n " +
-		"  \t(installs complete mod assembly with mods from remote source, requires steam authorisation using QR code)",
-		"Individual mod installation \n" +
-			"  \t(installing mods from Thunderstore by link, can be installed as new game instance or into existing installation folder)"}
-
-	installationMode, err := cli.SelectByNum("installation type", 2, nil, installationModes)
-	if err != nil {
-		fmt.Printf("Error selecting installation type: %v\n", err)
-		return fmt.Errorf("Error selecting installation type: %v\n", err)
-	}
-
-	cli.ClearTerminal()
-
-	switch installationMode {
-	case 0:
-		err = installs2.InstallCompleteAssembly()
-	case 1:
-		err = installs2.InstallWithIndividualMods()
-	default:
-		err = errors.New("invalid installation type")
-	}
+	err := installs2.InstallWithIndividualMods()
 	if err != nil {
 		return fmt.Errorf("Error assembly: %v\n", err)
 	}
@@ -85,7 +67,6 @@ func main() {
 		gui.ShowErrorPopup(fmt.Sprintf("Error loading constants: %v\n", err))
 		return
 	}
-	appdataHandling.CreateAssembliesFromLCVersions()
 	err = appdataHandling.LoadUserData()
 	if err != nil {
 		gui.ShowErrorPopup(fmt.Sprintf("Error loading user data: %v\n", err))
